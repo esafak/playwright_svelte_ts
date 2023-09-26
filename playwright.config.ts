@@ -1,12 +1,18 @@
-import type { PlaywrightTestConfig } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
 
-const config: PlaywrightTestConfig = {
-	webServer: {
-		command: 'pnpm run build && pnpm run preview',
-		port: 4173
-	},
-	testDir: 'tests',
-	testMatch: /(.+\.)?(test|spec)\.[jt]s/
-};
+const port = 5173
+ export default defineConfig({
+	 testDir: 'tests',
+	 reporter: 'html',
+	 fullyParallel: true,
+	 webServer: {
+		 command: 'pnpm run build && pnpm run dev',
+		 url: `http://localhost:${port}`,
+	 },
+	 testMatch: /(.+\.)?(test|spec)\.[jt]s/,
+     use: {
+		 baseURL: `http://localhost:${port}`
+	 },
 
-export default config;
+ });
+
